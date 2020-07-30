@@ -113,9 +113,15 @@ public class Main {
 
         //////////////
         // short-circuit = && , || (NOT, XOR은 두번 쓰기 불가능)
-        // 두번 쓰는 게 속도가 더 빠름
-//        System.out.println(10 > 20 || 20 < 50);
-//        System.out.println("");
+        // && 앞 조건이 false면 뒤 조건은 검사하지 않음
+        // || 하나만 참이어도 뒤는 검사하지 않음
+        int a = 0;
+        int b = 0;
+        System.out.println(a > 0 & b > 0 ); // false
+        System.out.println(a++ > 0 & b++ > 0); //false
+        System.out.println(a + ", " + b); // 1, 1
+                                        // && 이면 출력은 1, 0.
+        //        System.out.println(10 > 20 || 20 < 50);
         //////////////
 
 
