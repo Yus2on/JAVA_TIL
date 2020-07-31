@@ -1,6 +1,6 @@
 ## Homework #2
 
-	#### InputOutput
+	#### 	Input, Output
 
 ```` javascript
 public class Main {

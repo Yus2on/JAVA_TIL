@@ -30,10 +30,16 @@ public class Main {
 
         System.out.println("3 6 9 게임 시작 --------------------- \n");
 
-        for(int i = 1; i <= gameLength; i++) { // 게임 진행
-
+       // for(int i = 1; i <= gameLength; i++) { // 게임 진행
+       for(int i = myTurn; i <= gameLength; i+=myTurn) { // 게임 진행 // 내 순서 부터 시작
             int numClap = 0; // 짝의 횟수 - 3 6 9
             int numClap2 = 0; // 쿵의 횟수 - 5
+
+           int tempVal =i;
+           //while(tempVal) {  // 0보다 클 동안 계속 추출. 10의로 나눈 나머지 추출
+                               //10으로 나눈 나머지가 3, 6 , 9에 속하면 박수 카운트 . 5에 속하면 쿵 카운트
+
+           //}
 
             int num1 = i / 100; // 100의 자리 몫
             int a = i % 100; // 100의 자리 나머지

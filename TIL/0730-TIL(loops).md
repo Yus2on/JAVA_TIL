@@ -1,4 +1,8 @@
-## TIL
+## TIL(Today I Learned)
+
+---------
+
+
 
 - 반복문 (Loops)
 
@@ -16,29 +20,31 @@
 
 - **for 문** 
 
+  - for {} -> 괄호가 없으면 마지막 것만 실행 
+  
   ```` java
   //for 문
   //초기화      ; 조건식 ; 증감식
   for(int i = 0; i < 5; i ++){
     //초기화는 한 번 하고 끝
     	System.out.println(i); // 실행문
-  }
+}
   ````
-
+  
   ```` java
   for(int i = 0; i<5; i += 2){
     //증감식에 수식이 들어갈 수도 있음
     System.out.println(i);
-  }
+}
   ````
-
+  
   ``` java
   for(int i = 4; i>=0; i--){
     // 4 - 0까지 출력
     System.out.println(i);
-  }
+}
   ```
-
+  
   ``` java
   // nested for
   // i가 0인 상태로 for 실행   i가 0일 때 j는 0 - 4
@@ -47,9 +53,9 @@
       System.out.printf("(%d, %d)\n", i, j);
     }
   }
-  // 5 * 5 = 25
+// 5 * 5 = 25
   ```
-
+  
   ```` JAVA
   for(int i = 0; i < 5; i++){
     System.out.println(i);

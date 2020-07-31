@@ -1,4 +1,6 @@
-## TIL
+## TIL (Today I Learned)
+
+-------
 
 #### 조건문
 

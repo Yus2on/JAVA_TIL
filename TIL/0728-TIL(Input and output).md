@@ -14,6 +14,29 @@
   // System.out.print -> 줄바꿈 되지 않음. 개행문자(\n) 추가 한 게 println
   ````
 
+  ```` java
+  public class InputOutput {
+    public static void main(String[] args) {
+      Scanner scanner = new Scanner(System.in);
+  
+      System.out.print("Input integer (1/3): ");
+      int valOne = scanner.nextInt();
+      System.out.print("Input integer (2/3): ");
+      int valTwo = scanner.nextInt();
+      System.out.print("Input integer (3/3): ");
+      int valThree = scanner.nextInt();
+  
+      int valMax = valOne > valTwo ? valOne : valTwo;
+      valMax = valMax > valThree ? valMax : valThree;
+  
+      System.out.print("Maximum value:");
+      System.out.println(valMax);
+      scanner.close();
+      // 메모라 낭비를 막기 위해서 다 쓴 건 close
+    }
+  }
+  ````
+
   
 
 - 포맷문자열 지시자
