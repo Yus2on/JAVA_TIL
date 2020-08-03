@@ -1,4 +1,4 @@
-package com.company;
+package src;
 /**
  * 도메인 뒤집기
  *
@@ -14,7 +14,9 @@ public class Main {
     public static void main(String[] args) {
     	// write your code here
         String string = "www.google.com";
-/*
+
+
+        //case 1
         // . 의 인덱스를 찾는다 - 인덱스 값: 3
         int dot = string.indexOf(".");
 
@@ -32,19 +34,20 @@ public class Main {
         // com
         String domain3 = domain2.substring(domain2.length()-3, domain2.length());
 
-
-
         System.out.print(domain1+".");
 
         StringBuffer x = new StringBuffer();
         x.append(domain3+"."+domainx);
 
         System.out.println(x.reverse());
-*/
+
+
+
+        // case 2
         String[] domainString = string.split("\\."); // .을 기준으로 문자열 자르기
         for(int j = 0; j<domainString.length; j++){
             for(int i = domainString[j].length() - 1; i >= 0 ; i--)
-                System.out.print(domainString[j].charAt(i));
+                System.out.prißnt(domainString[j].charAt(i));
             if(j != domainString.length - 1) // 바로 다음 칸만 실행하고 끝. 마지막은 . 추가하면 안되니까 -1
                 System.out.print(".");
         }
