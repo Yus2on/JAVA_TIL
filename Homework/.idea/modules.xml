@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Homework.iml" filepath="$PROJECT_DIR$/.idea/Homework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/InputOutput/InputOutput.iml" filepath="$PROJECT_DIR$/InputOutput/InputOutput.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PrintFormat/PrintFormat.iml" filepath="$PROJECT_DIR$/PrintFormat/PrintFormat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/RingCounter/RingCounter.iml" filepath="$PROJECT_DIR$/RingCounter/RingCounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Homework.iml" filepath="$PROJECT_DIR$/Homework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyMath1/MyMath1.iml" filepath="$PROJECT_DIR$/MyMath1/MyMath1.iml" />
     </modules>
   </component>
 </project>
