@@ -47,7 +47,7 @@ public class Main {
         String[] domainString = string.split("\\."); // .을 기준으로 문자열 자르기
         for(int j = 0; j<domainString.length; j++){
             for(int i = domainString[j].length() - 1; i >= 0 ; i--)
-                System.out.prißnt(domainString[j].charAt(i));
+                System.out.print(domainString[j].charAt(i));
             if(j != domainString.length - 1) // 바로 다음 칸만 실행하고 끝. 마지막은 . 추가하면 안되니까 -1
                 System.out.print(".");
         }

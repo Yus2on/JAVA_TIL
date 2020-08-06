@@ -30,6 +30,6 @@ class SingletonPatternTest {
         SingletonPattern instanceTwo = SingletonPattern.getInstance();
 
         System.out.println("");
-        System.out.prin tln(instanceOne == instanceTwo); // should be true
+        System.out.println(instanceOne == instanceTwo); // should be true
     }
 }
