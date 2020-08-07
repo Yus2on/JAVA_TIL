@@ -66,40 +66,16 @@ $ git add fileName
 $ git commit
 # editor을 vim으로 설정해뒀기 때문에 vim으로 열린다
 # git commit -m 을 하면 한 줄로 가능
-
-# 커밋 내용은 영어로 작성
-# 첫 제목은 capitalization (첫문자는 대문자로 쓰기)
-
-docs : Create README.md
-	
-	# enter 두 번 후 아래는 내용 작성
-	# 문장형으로 지금의 commit을 설명
-	
-I created README.me to describe this repo.
-
-# 이후에는 다음에 할 일 to-do를 작성이나 prefix를 사용
-# prefix : 커밋의 용도를 알기 쉽게 작성한 것. 아래가 그 목록이다.
-
-feat : features
-docs : documentions
-fix : bug-fix # 버그 수정
-conf : confiauratcion
-deploy : delpoy
-refator : refactoring # 기존에 존재하던 코드의 효율성을 강화, 개선
-
-# 이후 :wq
-# 저장하고 싶지 않다면 q! 
-
 ````
 
->저장하고 나가면 commit 이 한 개 local repo에 쌓여 있는 상태이다.
+>vim으로 commit 작성 -> 저장하고 나가면 commit 이 한 개 local repo에 쌓여 있는 상태이다.
 
 
 
 ## git Commit message 입력
 
 - 모든 사용자가 읽을 수 있도록 되도록이면 영어를 사용해 작성
-- `feat:, docs:, test:, refactor:` 정도의 말머리만 잘 붙여도 깔끔한 관리가 가능합니다.
+- `feat:, docs:, test:, refactor:` 정도의 말머리만 잘 붙여도 깔끔한 관리가 가능.
   - Reference: [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/)
 - 내용은 optional body에 Enter로 구분하여 작성하며, 문장형으로 작성합니다.
 
@@ -182,19 +158,20 @@ Md is much better than HTML.
 
 
 
-## Commit Convention
+
 
 - 커밋 제목은 50자 이내로 요약하여 작성한다
+
 - 제목과 내용사이 한 칸는 규칙
 - prefix를 사용하여 한 눈에 커밋의 용도를 알기 쉽게 한다. 아래는 prefix의 종류.
 
 ```shell
-feat: features
-docs: documentations
-conf: configurations
-test: test
-fix: bug-fix
-refactor: refactoring
+feat: features # 새로운 기능 추가
+docs: documentations # 문서
+conf: configurations 
+fix: bug-fix # 버그 수정
+test : test # 테스트 코드, 리팩토링 테스트 코드 추가
+refactor: refactoring #코드 리팩토링 
 ci: Continuous Integration
 build: Build
 perf: Performance
