@@ -59,7 +59,7 @@
             //공백으로 구분되는 float 등.... --> TIL 하면서 해보기~~~
 
             //nextLine() 메소드는 new line(Enter)로 구분되는 입력
-            System.out.println(scaaner.nextfloat());
+            System.out.println(scanner.nextFloat());
             System.out.println(scanner.nextLine());
             System.out.println(scanner.nextLine());
             System.out.println(scanner.nextLine());
