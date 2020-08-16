@@ -154,8 +154,7 @@ public class Generics {
 
 
         // 제네릭 메소드 콜하기
-        // 동적 바인딩 -> 컴파일타임에는 동작이 완전히 정의되지 않음
-        // 런타임에 결정이 된다
+        // 동적 바인딩 -> 컴파일 타임에는 동작이 완전히 정의되지 않음 -> 런타임에 결정이 된다
 
         GenericMethod.staticMethod(new String(" "));
         GenericMethod.staticMethod("sdf");
