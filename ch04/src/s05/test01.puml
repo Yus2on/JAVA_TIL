@@ -1,0 +1,40 @@
+@startuml
+
+interface IFoo {
+   + void method(int x, int y);
+}
+
+abstract class Bar {
+    + static String name; // + public
+    Foo foo;
+    # int x;              // protected
+    ~ int y;             // default
+    - void method (String string); // private
+}
+
+class Qoo {
+    Foo foo;
+}
+
+class Foo {
+   int x;
+   void methodA();
+}
+
+Foo -left|> IFoo
+Bar -o Foo
+Qoo -right* Foo
+
+title class Diagram Title
+
+note bottom of foo
+   Foo 는 Bar 가 Aggregation
+   Foo 는 Bar 가 Aggregation
+
+
+ not bottom of Bar
+    void method (String str)
+    return string
+
+endnote
+@enduml
