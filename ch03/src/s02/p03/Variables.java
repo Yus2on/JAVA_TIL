@@ -14,7 +14,7 @@ public class Variables {
 
     public void method(int paramVar){ //로컬 파라미터 변수
         int localVal; // 로컬 변수
-        localVal = 10;
+        localVal = 0;
 
         //System.out.println(localVal); // 로컬변수는 0으로 초기화 할 수 없음
         localVal = 10;

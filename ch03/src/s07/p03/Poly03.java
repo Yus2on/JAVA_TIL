@@ -19,7 +19,7 @@ class Bar extends Foo {
     // 자식 쪽에서만 가능. 상속 받았기 때문에
     @Override
     public Bar getInstance(){
-    // public Foo getInstance(){
+    //public Foo getInstance(){
         return this;
     }
 }

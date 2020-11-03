@@ -66,14 +66,14 @@ public class Main {
        // person.work();
 
         Develper dev = new Develper();
-        //dev.writeCode();
-        //dev.work();
+        dev.writeCode();
+        dev.work();
 
         // 부모 클래스 자료형으로 자식 클래스를 받을 수 있다
         Person p = (Person)dev; // 변수 p는 Develper인 p가 될 수도 있고,Student가 될 수도 있다
-        //p.writeCode(); // 부모 클래스 자료형이지만 오버라이드 된 메소드가 동작한다.
+        p.writeCode(); // 부모 클래스 자료형이지만 오버라이드 된 메소드가 동작한다.
         p = (Person)sdu;
-        //p.writeCode();
+        p.writeCode();
         // 다형성 (Polymorphism)의 구현 중 하나이다.
 
 
