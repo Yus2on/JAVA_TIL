@@ -109,5 +109,8 @@ public class Enumeration {
         System.out.println(fam.getKoreanWord());
         System.out.println(Family.SON.getKoreanWord());
 
+        Family fam1 = Family.DAUGHTER;
+        System.out.println(Family.FATHER.getKoreanWord());
+
     }
 }
