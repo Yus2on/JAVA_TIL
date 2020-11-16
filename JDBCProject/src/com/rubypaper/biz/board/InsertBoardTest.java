@@ -43,6 +43,10 @@ public class InsertBoardTest {
             // 4. SQL을 전송한다.
             String sql = "insert into board(seq, title, writer, content) "
                     + "values((select nvl(max(seq), 0) +1 from board), '테스트제목', '테스터', '테스트 내용....')";
+            // seq가 데이터가 없으면 null
+            // nvl(max(seq), 0) + 1 => seq 가 null 이면 0 으로 치환 -> + 1 -> 1
+            // seq는 값을 지정하지 않아도 하나씩 증가하게 됨
+            // nvl 함수는 오라클에만 존재 -> COALESCE(max(shipperId), 0) 해야지 모드 DBMS 에 사용
             int cnt = stmt.executeUpdate(sql);
             System.out.println(cnt + "건의 데이터 처리 성공!!");
         } catch (SQLException throwables) {
