@@ -52,6 +52,23 @@ cmake-build-*/
 # IntelliJ
 out/
 
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+.classpath
+.project
+
+
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
