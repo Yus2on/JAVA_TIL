@@ -1,4 +1,4 @@
-package ServletProject.web.board;
+package com.rubypaper.web.board;
 
 import java.io.IOException;
 
@@ -46,6 +46,7 @@ public class InsertBoardServlet extends HttpServlet {
 		// 0. 글로벌 파라미터 정보 추출 
 		//ServletContext 객체를 이용하면 글로벌 파라미터
 		// 모든 서블릿에서 다쓸 수 있음 
+		request.setCharacterEncoding("UTF-8");
 		ServletContext context = getServletContext();
 		encoding = context.getInitParameter("boardEncoding");
 		

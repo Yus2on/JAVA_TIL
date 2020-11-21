@@ -23,6 +23,8 @@ public class BoardDAO {
 	private static final String BOARD_DELETE     = "DELETE BOARD WHERE SEQ = ?";
 	private static final String BOARD_GET        = "SELECT * FROM BOARD WHERE SEQ = ?";
 	private static final String BOARD_LIST       = "SELECT * FROM BOARD ORDER BY SEQ DESC";
+	// 이렇게 쿼리문에서 정의해줘도 됨 
+	// private static final String BOARD_SEARCH_TITLE = "SELECT * FROM BOARD WHERE TITLE LIKE '%'||?||'%' ORDER BY SEQ DESC";
 	private static final String BOARD_SEARCH_TITLE = "SELECT * FROM BOARD WHERE TITLE LIKE ? ORDER BY SEQ DESC";
 	private static final String BOARD_SEARCH_CONTENT = "SELECT * FROM BOARD WHERE CONTENT LIKE ? ORDER BY SEQ DESC";
 
@@ -118,7 +120,8 @@ public class BoardDAO {
 
 	// 글 목록 검색
 	// 검색 결과를 얘가 처리하도록 결정하면 안 됨 -> 클라이언트 소스 단에서 이뤄져야 함
-	public List<BoardVO> getBoardList(String searchCondition, String searchKeyword) {
+	// public List<BoardVO> getBoardList(String searchCondition, String searchKeyword) {
+	public List<BoardVO> getBoardList(BoardVO vo) {
 		// 비어있는 리스트 컬렉션을 생성한다.
 		List<BoardVO> boardList = new ArrayList<BoardVO>();
 		
@@ -129,17 +132,17 @@ public class BoardDAO {
 		try {
 			conn = JDBCUtil.getConnection();
 			
-			if (searchCondition.equals("none")) {
+			if (vo.getSearchCondition().equals("none")) {
 				// 전체 목록
 				stmt = conn.prepareStatement(BOARD_LIST);
-			} else if (searchCondition.equals("TITLE")) {
+			} else if (vo.getSearchCondition().equals("TITLE")) {
 				// 제목 검색 
 				stmt = conn.prepareStatement(BOARD_SEARCH_TITLE);
-				stmt.setString(1, "%" + searchKeyword + "%");
-			} else if (searchCondition.equals("CONTENT")) {
+				stmt.setString(1, "%" + vo.getSearchKeyword() + "%");
+			} else if (vo.getSearchCondition().equals("CONTENT")) {
 				// 내용 검색 
 				stmt = conn.prepareStatement(BOARD_SEARCH_CONTENT);
-				stmt.setString(1, "%" + searchKeyword + "%");
+				stmt.setString(1, "%" + vo.getSearchKeyword() + "%");
 			} 
 			
 			rs = stmt.executeQuery(); // select 

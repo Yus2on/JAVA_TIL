@@ -1,4 +1,4 @@
-package com.rubypaper.biz.common;
+package com.rubypaper.web.common;
 
 import java.io.IOException;
 import javax.servlet.Filter;

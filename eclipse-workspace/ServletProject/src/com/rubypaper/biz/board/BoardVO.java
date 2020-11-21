@@ -28,6 +28,8 @@ public class BoardVO {
 	private String content;
 	private Date regDate;
 	private int cnt;
+	private String searchCondition;
+	private String searchKeyword;
 	
 //	// win 단축키 alt shift s 
 //	public BoardVO(String title, String writer, String content) {
