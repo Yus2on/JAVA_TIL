@@ -1,6 +1,7 @@
 package com.rubypaper.biz.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
+	//private BoardDAOSpring boardDAO;
 	
 //	public BoardServiceImpl() {
 //		System.out.println("==> BoardServiceImpl() 생성 ");
@@ -24,7 +26,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void insertBoard(BoardVO vo) {
-		// System.out.println("[ 사전처리 ] 비즈니스 로직 수행 전 동작");
+//		if(vo.getSeq() == 0) {
+//			throw new IllegalArgumentException();
+//		}
+		
 		boardDAO.insertBoard(vo);
 	}
 	
