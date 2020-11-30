@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- 트랜잭션 자동 설정 -->
+	<!-- TransactionManager 등록 -->
+	<!-- TransactionManager 는 데이터베이스 연동 기술에 따라 다른 클래스를 등록해야 한다.
+		예를 들어 Hiberneate 를 이용하여 DAO 클래스를 구현했다면 HibernateTransactionManager를 등록해야 한다.
+		그리고 모든 TransactionManager 클래스들은 FlatformTransactionManager 인터페이스를 구현하고 있다.
+	 -->
+	<bean id="txManager" class="org.springframework.jbdc.datasource.DataSourceTranasctionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 트랜잭션 Advice 클래스 등록  -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="*" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 비즈니스 메소드(ServiceImpl) 와 txAdvice 를 연결하기 위한 AOP 설정 
+		- 트랜잭션 AOP 설정에서는 aspect 태그 대신 advisor 태그를 사용해야 한다. 
+		- aspect를 설정하려면 메소드 이름을 알아야하는데 내가 만들지 않아서 메서드 이름을 알 수 없음 (= 어스펙트 사용불가 ) 
+		- 
+	-->
+	<aop:config>
+		<aop:pointcut id="txPointcut" expression="execution(* com.rubypaper..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+	</aop:config>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
