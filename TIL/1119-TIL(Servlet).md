@@ -60,7 +60,7 @@
 - Apache : WEB 서버
 - Apache Tomcat : WAS (Web Application Server)
   - JAVA EE 기반의 WEB/WAS의 기능을 가진 자바 어플리케이션
-  - WAS는 자바로 만들어진 JSP와 Servlet을 구동하기 위한 **[서블릿 컨테이너 역할](#서블릿-컨테이너-(servlet-container))**
+  - WAS는 자바로 만들어진 JSP와 Servlet을 구동하기 위한 **[서블릿 컨테이너](#서블릿-컨테이너-(servlet-container))** 역할
   - 톰캣 서버를 구동하면 톰캣 객체 생성 -> 그 안에 포함된 서블릿 엔진 생성
   - 서블릿 엔진은 web.xml 로딩 +  thread pool 생성 + 전체 라이프 사이클 관리
   - 서블릿 엔진은 객체를 생성해주는 코드와 메서드 호출 코드 실행 (= 내부동작 보이지 않게 진행)
