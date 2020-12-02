@@ -36,8 +36,8 @@
 			<table border='1' cellpadding='0' cellspacing='0' width='700'>
 				<tr>
 					<td align='right'><select name='searchCondition'>
-							<option value='TITLE'>제목
-							<option value='CONTENT'>내용
+						<option value="TITLE" <c:if test="${search.searchCondition == 'TITLE'}">  selected="selected"></c:if>>제목</option>
+						<option value="CONTENT" <c:if test="${search.searchCondition == 'CONTENT'}">  selected="selected"></c:if>>내용</option>
 					</select> 
 					<input name='searchKeyword' type='text' /> 
 					<input type='submit' value='검색' /></td>
@@ -65,7 +65,7 @@
 			</c:forEach>
 			
 		</table>
-		<br> <a href='insertBoard.jsp'>새글 등록</a>
+		<br> <a href='insertBoard.do'>새글 등록</a>
 	</center>
 </body>
 </html>

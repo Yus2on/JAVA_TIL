@@ -19,7 +19,7 @@ public class BoardDAOJDBC implements BoardDAO  {
 	// BOARD 테이블 관련 SQL 명령어
 	private static final String BOARD_INSERT     = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) " + 
 											       "VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), ?, ?, ?)";
-	private static final String BOARD_UPDATE     = "UPDATE BOARD SET TITLE=?, CONTENT=? WHERE SEQ=?";
+	private static final String BOARD_UPDATE     = "UPDATE BOARD SET TITLE=?, WRITER=?, CONTENT=? WHERE SEQ=?";
 	private static final String BOARD_UPDATE_CNT = "UPDATE BOARD SET CNT=CNT + 1 WHERE SEQ=?";
 	private static final String BOARD_DELETE     = "DELETE BOARD WHERE SEQ=?";
 	private static final String BOARD_GET        = "SELECT * FROM BOARD WHERE SEQ=?";
@@ -51,8 +51,9 @@ public class BoardDAOJDBC implements BoardDAO  {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(BOARD_UPDATE);
 			stmt.setString(1, vo.getTitle());
-			stmt.setString(2, vo.getContent());
-			stmt.setInt(3, vo.getSeq());
+			stmt.setString(2, vo.getWriter());
+			stmt.setString(3, vo.getContent());
+			stmt.setInt(4, vo.getSeq());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

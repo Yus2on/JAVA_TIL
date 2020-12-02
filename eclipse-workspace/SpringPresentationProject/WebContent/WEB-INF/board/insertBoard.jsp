@@ -14,15 +14,15 @@
 		<table border="1" cellpadding="0" cellspacing="0">
 			<tr>
 				<td bgcolor="orange" width="70">제목</td><td align="left">
-				<input type="text" name="title"/></td>
+				<input type="text" name="title" value="${boardVO.title} "/></td>
 			</tr>
 			<tr>
 				<td bgcolor="orange">작성자</td><td align="left">
-				<input type="text" name="writer" size="10"/></td>
+				<input type="text" name="writer" size="10" value="${boardVO.writer} " /></td>
 			</tr>
 			<tr>
 				<td bgcolor="orange">내용</td><td align="left">
-				<textarea name="content" cols="40" rows="10"></textarea></td>
+				<textarea name="content" cols="40" rows="10">${boardVO.content} "</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

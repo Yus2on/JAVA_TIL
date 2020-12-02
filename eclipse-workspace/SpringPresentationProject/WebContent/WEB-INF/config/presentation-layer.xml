@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 
-	<!-- 모든 컨트롤러 클래스들을 bean 에 등록한다  -->
+	<!-- 모든 컨트롤러 클래스들을 bean 에 등록한다  
 	<bean id="login" class="com.rubypaper.web.controller.user.LoginController" />
 	<bean id="logout" class="com.rubypaper.web.controller.user.LogoutController" />
 	<bean id="getBoardList" class="com.rubypaper.web.controller.board.GetBoardListController" />
@@ -12,9 +14,9 @@
 	<bean id="insertBoard" class="com.rubypaper.web.controller.board.InsertBoardController" />
 	<bean id="updateBoard" class="com.rubypaper.web.controller.board.UpdateBoardController" />
 	<bean id="deleteBoard" class="com.rubypaper.web.controller.board.DeleteBoardController" />
+	-->
 	
-	
-	<!--  클라이언트의 요청을 어떤 컨트롤러가 처리할지 HandlerMapping 으로 매핑한다.  -->
+	<!--  클라이언트의 요청을 어떤 컨트롤러가 처리할지 HandlerMapping 으로 매핑한다.  
 	<bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
@@ -28,6 +30,8 @@
 			</props>
 		</property>
 	</bean>
+	-->
+	
 	
 	<!-- ViewResolver 를 등록한다 
 		- 브라우저는 절대 서버가 관리하는 프로젝트의 WEB-INF 폴더에 접근할 수 없다
@@ -38,6 +42,10 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 	
+	<!-- 컴포넌트 스캔 설정 -->
+	<context:component-scan base-package="com.rubypaper" />
+	
+	
+	
 
 </beans>
- 

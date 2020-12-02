@@ -5,41 +5,29 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
-						">
+	                    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	                    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+	<!-- 	
+	<bean id="boardDAO" class="com.rubypaper.biz.board.BoardDAO"></bean>
 
-	<!-- <bean id="boardDAO" class="com.rubypaper.biz.board.BoardDAO"></bean> 
-		세터 인젝션 <bean id="boardService" class="com.rubypaper.biz.board.BoardServiceImpl"> 
-		<property name="boardDAO" ref="boardDAO"></property> </bean> -->
-
+	<bean id="boardService" class="com.rubypaper.biz.board.BoardServiceImpl">
+		<property name="boardDAO" ref="boardDAO"></property>
+	</bean>
+	 -->
+	 
 	<!-- 컴포넌트 스캔 설정 -->
 	<context:component-scan base-package="com.rubypaper.biz"/>
 	
-	
-	<!--  BoardDAO 는 실제로 사용할 클래스 하나만 등록한다  -->
-	<bean class="com.rubypaper.biz.board.BoardDAOSpring" />
-	
-	<!--  UserDAO 는 실제로 사용할 클래스 하나만 등록한다  -->
-	<bean class="com.rubypaper.biz.user.UserDAOSpring" />
+	<!-- DAO는 실제로 사용할 클래스 하나만 등록한다. -->
+	<bean class="com.rubypaper.biz.board.BoardDAOSpring"/>
+	<bean class="com.rubypaper.biz.user.UserDAOSpring"/>
 	
 	<!-- Annotation 기반의 AOP 설정 -->
 	<aop:aspectj-autoproxy/>
 	
-	
-	<!-- DataSource 설정 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="org.h2.Driver"></property>
-		<property name="url" value="jdbc:h2:tcp://localhost/~/test"></property>
-		<property name="username" value="sa"></property>
-		<property name="password" value=""></property>
-	</bean>
-	
-	
 	<!-- Spring JDBC 설정 -->
 	<bean class="org.springframework.jdbc.core.JdbcTemplate">
-		<!--  데이터 소스에 대한 세터 인젝션 필수  -->
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<!-- 횡단관심에 해당하는 공통 클래스를 bean 등록한다. 
@@ -70,8 +58,15 @@
 		</aop:aspect>
 	</aop:config>
 	-->
-
 </beans>
+
+
+
+
+
+
+
+
 
 
 
