@@ -1,14 +1,19 @@
 package com.rubypaper.web.controller.board;
 
+import java.io.File;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.rubypaper.biz.board.BoardDAO;
+import com.rubypaper.biz.board.BoardService;
 import com.rubypaper.biz.board.BoardVO;
 
 // @SessionAttributes(복수형, 배열형태로 여러개 가능 ) 를 이용하면 특정 이름으로 Model 에 저장한 데이터를 세션에도 등록되도록 한다
@@ -20,7 +25,15 @@ import com.rubypaper.biz.board.BoardVO;
 public class BoardController {
 	
 	@Autowired
-	private BoardDAO boardService;
+	private BoardService boardService;
+	
+	@RequestMapping("/dataTransform.do")
+	@ResponseBody // HTTP 응답 프로토콜 Body에 JSON 으로 변환된 글 목록을 출력하도록 하는 설정  
+	public List<BoardVO> dataTransform(BoardVO vo) {
+		vo.setSearchCondition("TITLE");
+		vo.setSearchKeyword("");
+		return boardService.getBoardList(vo);
+	}
 
 	// 글 등록 화면 이동 
 	@RequestMapping(value="/insertBoard.do", method=RequestMethod.GET)
@@ -36,10 +49,14 @@ public class BoardController {
 	
 	// 글 등록
 	@RequestMapping(value="/insertBoard.do", method=RequestMethod.POST)
-	public String insertBoard (BoardVO vo) {
-		System.out.println("게시 글 등록 기능 처리");
+	public String insertBoard(BoardVO vo) throws Exception {
+		// 파일 업로드 처리
+		MultipartFile uploadFile = vo.getUploadFile();
+		if(!uploadFile.isEmpty()) // 파일 업로드 정보가 하나라도 있다면...
+			uploadFile.transferTo(new File("C:/DEV/upload_files/" + uploadFile.getOriginalFilename()));
 		
-		boardService.insertBoard(vo);
+		// 글 등록 기능 처리
+		boardService.insertBoard(vo);	
 		return "forward:getBoardList.do";
 	}
 	
@@ -83,29 +100,28 @@ public class BoardController {
 	}
 	*/
 	
-	// 글 상세 조회   
+	// 글 상세 조회
 	@RequestMapping("/getBoard.do")
-	public String getBoard (BoardVO vo, Model model) {
-		System.out.println("상세 화면에서의 BoardVO 객체 정보 ");
-		System.out.println(vo.toString());
-		// Model 에 저장한 데이터는 자동으로 Request에 등록된다. (세션이 아님) 
+	public String getBoard(BoardVO vo, Model model) {
+		// Model에 저장한 데이터는 자동으로 request에 등록된다.
 		model.addAttribute("board", boardService.getBoard(vo));
 		return "getBoard";
 	}
 	
-	// 글 목록 검색   
+	// 글 목록 검색
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList (BoardVO vo, Model model) {
-		// Null chk 
-		System.out.println("목록 검색 기능 처리");
+	public String getBoardList(BoardVO vo, Model model) {
+		// Null Check
 		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
 		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
 		
-		// 절대 검색 결과는 세션에 저장해서는 안된다. 검색 결과는 request 에 등록해야 한다. 
-		// ModelAndView나  Model 객체에 검색 결과를 등록하면 자동으로 세션이 아닌 request 에 등록해준다
-		model.addAttribute("boardList", boardService.getBoardList(vo));
-		model.addAttribute("search", vo);
-		return "getBoardList";
+		// 절대 검색 결과는 세션에 저장해서는 안된다. 검색 결과는 request에 등록해야 한다. 
+		// Model 객체에 검색 결과를 등록하면 자동으로 세션이 아닌 request에 등록해준다.
+		model.addAttribute("boardList", boardService.getBoardList(vo)); // Model 정보
+		model.addAttribute("search", vo);						    // Model 정보
+		
+		return "getBoardList"; // View 리턴
 	}
+
 
 }

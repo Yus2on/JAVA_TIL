@@ -7,7 +7,8 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 public class BoardServiceClient {
 	public static void main(String [] args) {
 		// String[] configuration = {"business-layer.xml", "business-transaction.xml"} ;
-		GenericXmlApplicationContext container = new GenericXmlApplicationContext("");
+		GenericXmlApplicationContext container = 
+				new GenericXmlApplicationContext("business-*.xml");
 	
 		BoardService boardService = (BoardService) container.getBean("boardService");
 		if(boardService != null) {

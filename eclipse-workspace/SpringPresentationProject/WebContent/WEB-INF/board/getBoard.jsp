@@ -45,11 +45,10 @@
 -->
 
 
-
 <!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
 <html>
 <head>
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+<meta http-equiv='Content-Type' content='text/html; charset=EUC-KR'>
 <title>글 상세</title>
 </head>
 <body>
@@ -60,26 +59,24 @@
 		</h3>
 		<hr>
 		<form action='updateBoard.do' method='post'>
-			<input type='hidden' name='seq' value='${ board.seq } }' />
-			<!--  ${board.seq}   seq는 프라이빗인데 이렇게 쓰면 자동적으로 getSeq() 호출하게 됨 만약엔 seq란게 없으면 패스됨 -->
-
+			<input type='hidden' name='seq' value='${board.seq }' />
 			<table border='1' cellpadding='0' cellspacing='0'>
 				<tr>
 					<td bgcolor='orange' width='70'>제목</td>
 					<td align='left'><input name='title' type='text'
-						value='${ board.title }' /></td>
+						value='${board.title }' /></td>
 				</tr>
 				<tr>
 					<td bgcolor='orange'>작성자</td>
-					<td align='left'>${ board.writer }</td>
+					<td align='left'>${board.writer }</td>
 				</tr>
 				<tr>
 					<td bgcolor='orange'>내용</td>
-					<td align='left'><textarea name='content' cols='40' rows='10'> ${ board.content }</textarea></td>
+					<td align='left'><textarea name='content' cols='40' rows='10'>${board.content }</textarea></td>
 				</tr>
 				<tr>
 					<td bgcolor='orange'>등록일</td>
-					<td align='left'>${ board.regDate }</td>
+					<td align='left'>${board.regDate }</td>
 				</tr>
 				<tr>
 					<td bgcolor='orange'>조회수</td>
@@ -92,10 +89,10 @@
 			</table>
 		</form>
 		<hr>
-		<a href='insertBoard.do'>글등록</a>
+		<a href='insertBoard.do'>글등록</a>&nbsp;&nbsp;&nbsp;
 		<c:if test="${user.role == 'ADMIN' }">
-			<a href='deleteBoard.do?seq=${board.seq }'>글삭제</a>
-		</c:if>
+			<a href='deleteBoard.do?seq=${board.seq }'>글삭제</a>&nbsp;&nbsp;&nbsp;
+</c:if>
 		<a href='getBoardList.do'>글목록</a>
 	</center>
 </body>

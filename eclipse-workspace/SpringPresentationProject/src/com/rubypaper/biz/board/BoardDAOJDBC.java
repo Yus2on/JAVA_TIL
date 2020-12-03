@@ -10,19 +10,19 @@ import com.rubypaper.biz.common.JDBCUtil;
 
 // 2. DAO(Data Access Object) 클래스
 //@Repository
-public class BoardDAOJDBC implements BoardDAO  {
+public class BoardDAOJDBC implements BoardDAO {
 	// JDBC 관련 변수 선언
 	private Connection conn;
 	private PreparedStatement stmt;
 	private ResultSet rs;
 	
 	// BOARD 테이블 관련 SQL 명령어
-	private static final String BOARD_INSERT     = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) " + 
-											       "VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), ?, ?, ?)";
-	private static final String BOARD_UPDATE     = "UPDATE BOARD SET TITLE=?, WRITER=?, CONTENT=? WHERE SEQ=?";
-	private static final String BOARD_UPDATE_CNT = "UPDATE BOARD SET CNT=CNT + 1 WHERE SEQ=?";
-	private static final String BOARD_DELETE     = "DELETE BOARD WHERE SEQ=?";
-	private static final String BOARD_GET        = "SELECT * FROM BOARD WHERE SEQ=?";
+	private static final String BOARD_INSERT       = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) " + 
+											         "VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), ?, ?, ?)";
+	private static final String BOARD_UPDATE       = "UPDATE BOARD SET TITLE=?, WRITER=?, CONTENT=? WHERE SEQ=?";
+	private static final String BOARD_UPDATE_CNT   = "UPDATE BOARD SET CNT=CNT + 1 WHERE SEQ=?";
+	private static final String BOARD_DELETE       = "DELETE BOARD WHERE SEQ=?";
+	private static final String BOARD_GET          = "SELECT * FROM BOARD WHERE SEQ=?";
 	private static final String BOARD_LIST_TITLE   = "SELECT * FROM BOARD WHERE TITLE LIKE '%'||?||'%' ORDER BY SEQ DESC";
 	private static final String BOARD_LIST_CONTENT = "SELECT * FROM BOARD WHERE CONTENT LIKE '%'||?||'%' ORDER BY SEQ DESC";
 	

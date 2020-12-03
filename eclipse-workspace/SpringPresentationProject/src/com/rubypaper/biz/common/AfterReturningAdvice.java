@@ -1,9 +1,16 @@
 package com.rubypaper.biz.common;
 
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Service;
+
 import com.rubypaper.biz.user.UserVO;
 
+@Service
+@Aspect
 public class AfterReturningAdvice {
 
+	@AfterReturning(pointcut="BoardPointcut.getPointcut()", returning="returnObj")
 	public void afterLog(Object returnObj) {
 		System.out.println("[ 사후 처리 ] 비즈니스 메소드 리턴 값 : " + returnObj.toString());
 		

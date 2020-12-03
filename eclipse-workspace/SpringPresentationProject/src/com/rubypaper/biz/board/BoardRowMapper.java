@@ -9,6 +9,7 @@ public class BoardRowMapper implements RowMapper<BoardVO> {
 
 	@Override
 	public BoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+//		System.out.println("rowNum : " + rowNum);
 		BoardVO board = new BoardVO();
 		board.setSeq(rs.getInt("SEQ"));
 		board.setTitle(rs.getString("TITLE"));
