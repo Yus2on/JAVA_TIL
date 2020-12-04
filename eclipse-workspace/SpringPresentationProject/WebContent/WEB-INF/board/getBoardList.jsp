@@ -31,8 +31,8 @@
 		</h3>
 		<!-- 검색 시작 -->
 		<form action='getBoardList.do' method='post'>
-		<input type='hidden' name='searchCondition' value='${session.searchCondition } }' />
-		<input type='hidden' name='searchKeyword' value='${ board.seq } }' />
+		<input type='hidden' name='searchCondition' value='${session.searchCondition }' />
+		<input type='hidden' name='searchKeyword' value='${ board.seq }' />
 			<table border='1' cellpadding='0' cellspacing='0' width='700'>
 				<tr>
 					<td align='right'><select name='searchCondition'>

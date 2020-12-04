@@ -2,15 +2,20 @@ package com.rubypaper.web.controller.user;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.rubypaper.biz.user.UserDAOJDBC;
+import com.rubypaper.biz.user.UserService;
 import com.rubypaper.biz.user.UserVO;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private UserService userService;
+	
 	// 로그인 화면 처리 
 	@RequestMapping(value="/login.do", method=RequestMethod.GET)
 	public String login (UserVO vo){
@@ -22,8 +27,8 @@ public class LoginController {
 
 	// 로그인 
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	public String login (UserVO vo, UserDAOJDBC userDAO, HttpSession session){
-		UserVO user = userDAO.getUser(vo);
+	public String login (UserVO vo, HttpSession session){
+		UserVO user = userService.getUser(vo);
 		if (user != null) {
 			// 로그인 성공 했을 때 세션에 상태정보 저장 
 			// HttpSession seesion = request.getSession(); -> session은 req랑 res처럼 그냥 씀

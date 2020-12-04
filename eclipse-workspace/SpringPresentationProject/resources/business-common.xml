@@ -19,8 +19,8 @@
 	<context:component-scan base-package="com.rubypaper.biz"/>
 	
 	<!-- DAO는 실제로 사용할 클래스 하나만 등록한다. -->
-	<bean class="com.rubypaper.biz.board.BoardDAOSpring"/>
-	<bean class="com.rubypaper.biz.user.UserDAOSpring"/>
+	<bean class="com.rubypaper.biz.board.BoardDAOMyBATIS"/>
+	<bean class="com.rubypaper.biz.user.UserDAOMyBATIS"/>
 	
 	<!-- Annotation 기반의 AOP 설정 -->
 	<aop:aspectj-autoproxy/>
