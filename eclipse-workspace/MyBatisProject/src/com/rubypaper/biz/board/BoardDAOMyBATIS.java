@@ -1,6 +1,7 @@
 package com.rubypaper.biz.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,6 +22,12 @@ public class BoardDAOMyBATIS {
 	public void insertBoard(BoardVO vo) {
 		System.out.println("===> MyBATIS 기반으로 insertBoard() 기능  처리");
 		mybatis.insert("BoardDAO.insertBoard", vo);
+		mybatis.commit();
+	}
+	
+	public void insertBoard(Map<String, Object> vo) {
+		System.out.println("===> MyBATIS 기반으로 insertBoard() 기능  처리");
+		mybatis.insert("BoardDAO.insertBoardMap", vo);
 		mybatis.commit();
 	}
 	
@@ -48,6 +55,18 @@ public class BoardDAOMyBATIS {
 	public List<BoardVO> getBoardList(BoardVO vo) {
 		System.out.println("===> MyBATIS 기반으로 getBoardList() 기능  처리");
 		return mybatis.selectList("BoardDAO.getBoardList");
+	}
+	
+	// 글 목록 검색
+		public List<Map<String, Object>> getBoardListMap(BoardVO vo) {
+			System.out.println("===> MyBATIS 기반으로 getBoardList() 기능  처리");
+			return mybatis.selectList("BoardDAO.getBoardList");
+		}
+	
+	// 게시글 수 검색
+	public int getTotalCount (BoardVO vo) {
+		System.out.println("===> MyBATIS 기반으로 getBoardList() 기능  처리");
+		return (int) mybatis.selectOne("BoardDAO.getTotalCount");
 	}
 }
 

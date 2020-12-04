@@ -22,6 +22,14 @@
 		#{content})
 	</insert>
 	
+	<insert id="insertBoardMap" parameterType="java.util.Map">
+		INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) 
+		VALUES((SELECT NVL(MAX(SEQ), 0) + 1 FROM BOARD), 
+		#{title}, 
+		#{writer}, 
+		#{content})
+	</insert>
+	
 	<update id="updateBoard">
 		UPDATE BOARD 
 		SET TITLE=#{title}, 
@@ -47,4 +55,19 @@
 		FROM BOARD 
 		ORDER BY SEQ DESC
 	</select>
+	
+		<select id="getBoardListMap" resultType="java.util.Map">
+		SELECT * 
+		FROM BOARD 
+		ORDER BY SEQ DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM BOARD
+		]]>
+	</select>
+	
+
 </mapper>
