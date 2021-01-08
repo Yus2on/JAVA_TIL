@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-@WebMvcTest
+@WebMvcTest(controllers = HelloWorldController.class)
 class HelloWorldControllerTest {
     @Autowired
     private MockMvc mockMvc;

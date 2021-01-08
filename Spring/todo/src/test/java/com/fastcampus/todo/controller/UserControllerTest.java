@@ -22,10 +22,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.io.File;
 
-/**
- * @author Martin
- * @since 2020/12/28
- */
 @SpringBootTest
 class UserControllerTest {
     private MockMvc mockMvc;
@@ -100,19 +96,7 @@ class UserControllerTest {
                                 new UserDto("martin", "martin@fastcampus.com", "seoul", "password"))))
                 .andExpect(status().isOk());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        House house = objectMapper.readValue(new File("file.json"), House.class);
-    }
-
-    public void test() {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<User> responseEntity = restTemplate.getForEntity("http://localhost:8070/api/user/1", User.class);
-
-        // 프로젝트 API 통신 server-server
-        // MSA < 도메인 서버 나눠져요 . <- API 통신
-    }
-
-    static class House {
-
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/user/3"))
+                .andExpect(status().isOk());
     }
 }
