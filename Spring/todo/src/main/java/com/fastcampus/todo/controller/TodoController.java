@@ -24,7 +24,8 @@ public class TodoController {
         todos.add(todo);
 
         return todos;
-    }       /// CRUD -> DB create / read / update / delete
+    }
+    /// CRUD -> DB create / read / update / delete
     /// delete -> DB x -> update (soft-delete)
     /// isDeleted() -> true : 지워졌다, false : 아직지워지지않았다.
 

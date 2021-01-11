@@ -21,3 +21,177 @@ Lock
 - tx1 : A, B, C
 - tx2 : C, D, A
 - 교착상태 (DeadLock)
+
+Service <- ?????? 스펙정의가 필요
+
+TDD -> Test Driven Development
+
+BDD -> Behavior Driven Development
+
+DDD -> Domain Driven Development // User -> 유저를 가입시키는 것(기존) : public void join(User user); // -> 유저가 가입을 하는 것 (DDD) : user.join();
+
+service 역할
+
+비지니스(스펙, 정책) 로직의 처리
+트랜잭션 관리
+PaymentController - PaymentRepository
+카드결제를 추가함
+CardPaymentController - (Card)PaymentRepository
+카카오페이를 추가함
+Kakao ...
+토스를 추가함
+Toss ...
+무통장입금
+...
+쿠폰 -> 100원미만 쿠폰(x)
+할인
+중복코드의 추상화
+PaymentService
+summary
+확장성
+재사용성
+Service Layer Test
+
+Controller/Repository Test 좀 달라요.
+SpringBoot 테스트
+장점
+실제로 돌아가는 것들 볼 수 있음.
+처음 테스트를 만들 때, 쉬움.
+단점
+Spring Context 로딩이 오래 걸림
+데이터, 상태같은 것들이 서비스간에 간섭을 일으킴
+세밀한 테스트가 불가능함
+이상한 시스템 문자열 <- 테스트방법(x)
+Mock 테스트의 장점
+실행속도 빠름
+테스트간 영향이 적어요
+정밀한 테스트 가능
+Controller -> SpringBootTest (<- 메소드를 호출) -> MockMvcTest (o) -> httpRequest중요 -> MockTest
+
+Service -> SpringBootTest -> MockTest (o)
+
+Repository -> SpringBootTest (o) -> SQL동작 -> MockTest
+
+테스트원칙
+F - Fast <- 2가지 중의적의미 (테스트를 하는것 자체가 빨라야된다, 테스트가 빨라야된다)
+I - Independent
+R - Repeatable
+S - Self Validating
+T - Timely
+https://tanzu.vmware.com/application-modernization-recipes/testing/spring-boot-testing-best-practices
+
+// UML <- Entity 설계 http://www.yes24.com/Product/Goods/4492519
+
+```java
+class User {
+    @OneToMany
+    List<Todo> todos;
+}
+
+class UserService {
+    @Transactional
+    public User getUser(Long userId) {
+        return userRepository.findById(userId);
+    }
+}
+
+class UserController {
+    public List<Todo> getTodos(Long userId) {
+        return userService.getUser(userId).getTodos();
+    }
+}
+
+```
+
+
+
+
+
+
+# 1/11
+
+예외처리 (Exception)
+- 오류 -> 실제로 런닝하는 시스템엠서 별개로 처리하고 싶은 것
+- Throwable (최상위 인터페이스)
+    - Error
+        - 시스템에 대한 오류 (JVM)
+        - 개발자과 관리할 영역이 아님 
+    - Exception
+        - 구현한 로직의 문제점 체크
+        - 개발자가 꼭 핸들링 해야 되는 영역 
+        - CheckedException
+            - 예외처리를 강제하고 있고, 처리하지 않으면 컴파일 오류
+            - method signature -> throw Exception (안 좋은 습관) 
+        - **UncheckedException** ( 기본 UncheckedException 으로 통일 )
+            - Runtime에 확인되는 오류
+            - RuntimeException 
+        -> 한 때 논란: 통일 UncheckedException ->  RuntimeException
+    - try - catch - finally
+    
+```java
+class Test {
+    public void test() {
+        try {
+            doSomething();
+        } catch (TypeConstraintException e1) {
+            doExceptionSomething();
+        } catch (NullPointerException e2) {
+            doExceptionSomething();
+        }
+    }
+}
+```
+
+```java
+class Test {
+    public void test() {
+        try {
+            doSomething();
+        } catch (TypeConstraintException | NullPointerException e) {
+            // java7부터 가능 - 비트 연산자 or 
+            doExceptionSomething();
+        }
+    }
+}
+```
+
+```java
+class Test {
+    public void test() {
+        try (BufferedInputStream bis = new BufferedInputStream()) {
+            // ... 
+        }
+    }
+}
+```
+        
+        
+- AOP (Aspect-Oriented Programming)
+    - 관점지향 프로그래밍 
+
+  관점(관심)
+-----------|---------
+    -> User|Service ->
+-----------|---------
+   -> Order|Service -> 
+-----------|---------
+     -> Pay|mentService ->
+-----------|---------
+  
+  
+- AOP 사용하는 경우
+    - 로그 
+    
+    
+- AOP 장점
+    - 어플리케이션 전체에 흩어진 공통기능을 하나의 로직으로 관리
+    - 각 로직들은 자신의 로직에 충실하면 됨 (SRP)
+    
+- AOP 용어
+    - Target: 해당 기능을 적용할 대상 클래스를 의미 
+    - Aspect: 해당 로직의 관심 밖에 있는 어떠한 기능을 추가로 제공
+    - Advice: Aspect의 기능 구현체, 언제 / 무엇을 할지 결정 
+    - Pointcut: 적용될 타켓의 어떤 위치 
+    - JoinPoint: Advice가 실행되는 위치 
+    
+    

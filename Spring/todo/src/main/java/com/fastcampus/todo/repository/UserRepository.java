@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByEmail(String email);
+    List<User> findByEmail(String email);
 
     // 문제점
     //  - 메서드 이름으로만 했더니 지저분해짐

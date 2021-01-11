@@ -1,11 +1,11 @@
 package com.fastcampus.todo.controller;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fastcampus.todo.dto.UserDto;
-import com.fastcampus.todo.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -13,14 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.io.File;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 @SpringBootTest
 class UserControllerTest {
@@ -73,6 +70,7 @@ class UserControllerTest {
     void before(WebApplicationContext wac) {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .alwaysDo(print())
+                .addFilters(new CharacterEncodingFilter("UTF-8", true))
                 .build();
     }
 
@@ -84,6 +82,22 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.name").value("martin"))
                 .andExpect(jsonPath("$.email").value("martin@fastcampus.com"));
+    }
+
+    @Test
+    void getUserByEmail() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("api/user?email=martin@fastcampus.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$.[0].id").value(1L))
+                .andExpect(jsonPath("$.[0].name").value("martin"))
+                .andExpect(jsonPath("$.[0].email").value("martin@fastcampus.com"));
+    }
+
+    @Test
+    void getUserByEmailIfThrown() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("api/user/?email="))
+                .andExpect(status().isOk());
     }
 
     @DisplayName("Post유저")

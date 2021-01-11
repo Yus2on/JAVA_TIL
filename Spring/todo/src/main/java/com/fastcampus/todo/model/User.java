@@ -1,9 +1,9 @@
 package com.fastcampus.todo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,30 +11,40 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
+@Where(clause = "deleted = false")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     // auto increment
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @NonNull
     @Column(name = "email")
     private String email;
-    private String address;
+//    private String address;
     private String password;
     private String bloodType;
     // json / http : blood_type,
     // java, json, url : bloodType, blood-type
+
+    @Embedded
+    private Address address;
+
+    @ColumnDefault("false")
+    private boolean deleted;    // primitive, 기본값 : false
 
     // @OneToOne
     // @OneToMany
     // @ManyToOne
     // @ManyToMany
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)   // 컬럼명: todo_id
     @ToString.Exclude
-    private Todo todo; // inner join User x Todo
+    @JsonIgnore
+    private Todo todo;      // inner join User x Todo
 
     public static User emptyObject() {
         return new User();
