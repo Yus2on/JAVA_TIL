@@ -1,6 +1,6 @@
 package com.fastcampus.todo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fastcampus.todo.dto.UserDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
@@ -43,10 +43,20 @@ public class User {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST}, orphanRemoval = true)   // 컬럼명: todo_id
     @ToString.Exclude
-    @JsonIgnore
+    // @JsonIgnore
     private Todo todo;      // inner join User x Todo
 
     public static User emptyObject() {
         return new User();
+    }
+
+    public static User of(UserDto userDto) {
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setAddress(new Address(userDto.getCity(), userDto.getAddress()));
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+
+        return User.of(userDto);
     }
 }

@@ -22,63 +22,55 @@ Lock
 - tx2 : C, D, A
 - 교착상태 (DeadLock)
 
-Service <- ?????? 스펙정의가 필요
-
-TDD -> Test Driven Development
-
-BDD -> Behavior Driven Development
-
-DDD -> Domain Driven Development // User -> 유저를 가입시키는 것(기존) : public void join(User user); // -> 유저가 가입을 하는 것 (DDD) : user.join();
-
-service 역할
-
-비지니스(스펙, 정책) 로직의 처리
-트랜잭션 관리
-PaymentController - PaymentRepository
-카드결제를 추가함
-CardPaymentController - (Card)PaymentRepository
-카카오페이를 추가함
-Kakao ...
-토스를 추가함
-Toss ...
-무통장입금
-...
-쿠폰 -> 100원미만 쿠폰(x)
-할인
-중복코드의 추상화
-PaymentService
-summary
-확장성
-재사용성
-Service Layer Test
-
-Controller/Repository Test 좀 달라요.
-SpringBoot 테스트
-장점
-실제로 돌아가는 것들 볼 수 있음.
-처음 테스트를 만들 때, 쉬움.
-단점
-Spring Context 로딩이 오래 걸림
-데이터, 상태같은 것들이 서비스간에 간섭을 일으킴
-세밀한 테스트가 불가능함
-이상한 시스템 문자열 <- 테스트방법(x)
-Mock 테스트의 장점
-실행속도 빠름
-테스트간 영향이 적어요
-정밀한 테스트 가능
-Controller -> SpringBootTest (<- 메소드를 호출) -> MockMvcTest (o) -> httpRequest중요 -> MockTest
-
-Service -> SpringBootTest -> MockTest (o)
-
-Repository -> SpringBootTest (o) -> SQL동작 -> MockTest
-
-테스트원칙
-F - Fast <- 2가지 중의적의미 (테스트를 하는것 자체가 빨라야된다, 테스트가 빨라야된다)
-I - Independent
-R - Repeatable
-S - Self Validating
-T - Timely
-https://tanzu.vmware.com/application-modernization-recipes/testing/spring-boot-testing-best-practices
+- Service <- ?????? 스펙정의가 필요
+    - TDD -> Test Driven Development
+    - BDD -> Behavior Driven Development
+    - DDD -> Domain Driven Development // User -> 유저를 가입시키는 것(기존) : public void join(User user); // -> 유저가 가입을 하는 것 (DDD) : user.join();
+    - service 역할
+        - 비지니스(스펙, 정책) 로직의 처리
+        - 트랜잭션 관리
+            - PaymentController - PaymentRepository
+            - 카드결제를 추가함
+                - CardPaymentController - (Card)PaymentRepository
+            - 카카오페이를 추가함
+                - Kakao ...
+            - 토스를 추가함
+                - Toss ...
+            - 무통장입금
+                - ...
+            - 쿠폰 -> 100원미만 쿠폰(x)
+            - 할인
+        - 중복코드의 추상화
+            - PaymentService
+        - summary
+            - 확장성
+            - 재사용성
+    - Service Layer Test
+        - Controller/Repository Test 좀 달라요.
+        - SpringBoot 테스트
+            - 장점 :
+                - 실제로 돌아가는 것들 볼 수 있음.
+                - 처음 테스트를 만들 때, 쉬움.
+            - 단점 :
+                - Spring Context 로딩이 오래 걸림
+                - 데이터, 상태같은 것들이 서비스간에 간섭을 일으킴
+                - 세밀한 테스트가 불가능함
+                - 이상한 시스템 문자열 <- 테스트방법(x)
+        - Mock 테스트의 장점
+            - 실행속도 빠름
+            - 테스트간 영향이 적어요
+            - 정밀한 테스트 가능
+    - Controller -> SpringBootTest (<- 메소드를 호출) -> MockMvcTest (o) -> httpRequest중요 -> MockTest
+    - Service -> SpringBootTest -> MockTest (o)
+    - Repository -> SpringBootTest (o) -> SQL동작 -> MockTest
+    - 테스트원칙
+        - F : Fast <- 2가지 중의적의미 (테스트를 하는것 자체가 빨라야된다, 테스트가 빨라야된다)
+        - I : Independent
+        - R : Repeatable
+        - S : Self Validating
+        - T : Timely
+        - https://tanzu.vmware.com/application-modernization-recipes/testing/spring-boot-testing-best-practices
+        
 
 // UML <- Entity 설계 http://www.yes24.com/Product/Goods/4492519
 
@@ -193,5 +185,70 @@ class Test {
     - Advice: Aspect의 기능 구현체, 언제 / 무엇을 할지 결정 
     - Pointcut: 적용될 타켓의 어떤 위치 
     - JoinPoint: Advice가 실행되는 위치 
+- 단위테스트 = (A + B + C)
+- Transaction 끝나고 나면 -> Lazy fetch가 불가능함 (그렇게 만들어놓은것)
+- Transaction 끝나면 -> persistence-context (session 종료, db connection 반납된 상태) -> lazy fetch (불가능)
+- 배치 : 데이터를 대용량으로 처리하는 것들
+    - ETL : extract(추출) / transformation(변환) / Load(적재)
+    - Reader - Processor - Writer
+    - 필요성
+        - 실시간 -> fast (뒷단의 로직은 lead time이 김)
+        - 필수적인것만 실시간으로 처리 / 나머지 배치
+    - 트렌드 : 약간 사양세... (현재는 엄청 쓰고 있음)
+        - Kafka - Event Stream 방식 (Event Driven)
+        - Async 방식의 처리에 약간씩 밀리고 있음
+        - Spring Cloud (pivotal 밀고있음)
+            - spring-batch -> stream 변경되고 있음
+    - 주기적으로 실행할 수 있는 방법
+        - crontab
+        - quartz <- (시계)
+        - jenkins (hudson)
+        - spring-batch
     
     
+  
+## 1/18
+  
+- 카프카 장점
+   
+- 카프카 단점
+    - 별도의 감사(auditing) 시스템 필요  
+    - 실제 운영 상황에서는 이론과 같지 않음
+    
+  
+- 주키퍼 (ZooKeeper)
+    - 분산 어플리케이션을 관리하는 시스템 (Zoo == 어플리케이션
+    )
+    - 주키퍼 - 카프카 커넥션을 맺고 상태 관리
+    - 리더 / 팔로워 (Master / slave) 
+    - 
+     
+- 카프카 용어
+    - Producer : 카프카에 데이터를 보내는 Application
+    - Broker : 카프카 서버 (프로듀서가 임시로 브로커한테 저장) 
+    - Consumer : 카프카로부터 데이터를 받아서 처리하는 Application
+    - Topic : 카프카 메시지를 식별하기 위한 레이블 
+    - Partition : 토픽을 분산 저장하는 단위 (파티션을 무조건 늘린다고 해서 브로커의 수준이 늘진 않음. 적은 수준에선 파티션이 늘수록 브로커가 역할을 많이 할 수 있음)
+        - 물건이 계속 들어올 때 창고가 하나일때 창고를 세개로 늘리는 건 쉬움 
+        - 하지만 창고 백개를 창고 하나로 줄이는 건 어려움 
+        - 무작정 늘리기보단 적은 단계에서 추가해야 함 
+    - Offset : 카프카 내에서 데이터의 위치 
+    - 리더/팔로워 : 팔로워는 리더의 정보를 복제해서 컨슈머한테 전달 
+
+- 브로드캐스팅 
+    - ㅁ
+    - ㅁㅁ
+    
+    
+    
+    
+-----
+- 익셉션 핸들링
+- 테스트 만들기
+- 서비스는 도메인 공부필요 (트랜잭션 중요 ) 
+- 어플리케이션.yml  -> 가장 최신버전의 작업법
+    - 카프카도 jpa 하듯 맵핑되지 않을까?
+    - 테스트할때 http 사용하면 편리 
+- 그래들은 groovy 자바같은 스크립트기반 언어
+    - 디펜던시가 어케 동작하는진 공부 필요 
+       

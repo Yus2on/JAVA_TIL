@@ -14,6 +14,21 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    producer:
+      key-serializer: org.apach.kafka.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: "user-consumer"
+      key-deserializer: org.apach.kafka.serialization.StringSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.fastcampus.*"
+
 logging:
   level:
     org:
