@@ -7,17 +7,14 @@ import com.fastcampus.todo.model.User;
 import com.fastcampus.todo.repository.TodoRepository;
 import com.fastcampus.todo.repository.UserRepository;
 import com.fastcampus.todo.service.UserService;
-import java.util.List;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 
 @RestController
@@ -35,7 +32,7 @@ public class UserController {
 
     // 꼭 필요한 필수값이면서 판별값이 아니라면 리퀘스트파람으로 넣음 아니면 패스트베리어블
     @GetMapping("/api/user")        // localhost:8070/api/user?email=martin@fastcampus.com
-    public List<User> getUserByEmail(@RequestParam String email) {
+    public List<User> getUserByEmail(@RequestParam @NotEmpty String email) {
         return userService.getUsersByEmail(email);
     }
 

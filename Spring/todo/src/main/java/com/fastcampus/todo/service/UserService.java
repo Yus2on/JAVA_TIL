@@ -3,7 +3,6 @@ package com.fastcampus.todo.service;
 import com.fastcampus.todo.aop.CustomLog;
 import com.fastcampus.todo.dto.UserDto;
 import com.fastcampus.todo.exception.EmailRequiredException;
-import com.fastcampus.todo.model.Address;
 import com.fastcampus.todo.model.User;
 import com.fastcampus.todo.repository.TodoRepository;
 import com.fastcampus.todo.repository.UserRepository;

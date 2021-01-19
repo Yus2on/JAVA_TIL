@@ -53,10 +53,10 @@ public class User {
     public static User of(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getName());
-        user.setAddress(new Address(userDto.getCity(), userDto.getAddress()));
+        user.setAddress(new Address(userDto.getCity(), userDto.getProvince()));
         user.setEmail(userDto.getEmail());
         user.setPassword(userDto.getPassword());
 
-        return User.of(userDto);
+        return user;
     }
 }
